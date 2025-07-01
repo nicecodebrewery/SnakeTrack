@@ -1,3 +1,3 @@
-from initrepo import init
+from .initrepo import init
 
 __all__ = ["init"]

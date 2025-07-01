@@ -1,2 +1,3 @@
-print("Magic will happen here.")
+from core.initrepo import init
 
+init("testrepo")
