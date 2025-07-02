@@ -1,14 +1,14 @@
 import os
 import configparser
 
-class GitRepository(object):
+class SnakeRepository(object):
     """A git repository"""
 
     worktree = None
     snakedir = None
     conf = None
 
-    def __init__(self,path,force = False):
+    def __init__(self,path,force = True):
         self.worktree = path
         self.snakedir = os.path.join(path,".snake")
 
@@ -62,7 +62,7 @@ def repo_dir(repo, *path, mkdir=False):
 def repo_create(path):
     """Creates a repository"""
 
-    repo = GitRepository(path,force=True)
+    repo = SnakeRepository(path,force=True)
 
     if os.path.exists(repo.worktree):
         if not os.path.isdir(repo.worktree):
@@ -98,5 +98,20 @@ def repo_default_conf():
 
      return ret
 
+def repo_find(path=".",required=True):
+    path = os.path.realpath(path)
+
+    if os.path.isdir(os.path.join(path,'.snake')):
+          return SnakeRepository(path)
+     
+    parent = os.path.realpath(os.path.join(path,'..'))
+     
+    if parent == path:
+        if required:
+            raise Exception("No repo found.")
+        else:
+             return None
+    
+    return repo_find(parent,required)
 
      

@@ -21,4 +21,5 @@ def main():
         return
     match sys.argv[1]:
         case 'init' : cmd_init(sys.argv[2:])
+        case 'dog-file' :cmd_dog_file(sys.argv[2:])
         case _ : print("Bad command")
