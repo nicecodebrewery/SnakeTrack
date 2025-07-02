@@ -1,3 +1,3 @@
-from .initrepo import init
+from .cmd_init import cmd_init
 
-__all__ = ["init"]
+__all__ = ["cmd_init"]
